@@ -369,3 +369,6 @@ https://www.thegeekstuff.com/2009/03/15-practical-unix-grep-command-examples/
 
 _____________________________________________________________________________________
 
+смотреть версию сошиал сервера
+обновляешься на ревизию, где хочешь посмотреть хэш social-server’а, потом 
+cd mobile-framework && git submodule status
