@@ -378,3 +378,17 @@ GIT
 
 Посмотреть в какой ветке сделан коммит
 git branch -a --contains 1add79c4a62d0a37265e9870cc511d6c1b1a82d2
+
+_____________________________________________________________________________________
+
+Ошибка вида 
+ BUILDING library jboss-modules-1.8.10
+12:51:25.249   * Fetching
+12:51:25.252   * Unpacking
+12:51:25.295   * Patching
+12:51:25.300   JOB FAILED
+12:51:25.300   BUILD FAILED
+12:51:25.300   rake aborted!
+12:51:25.300   error: patch --binary -Np1 -i /home/vagrant/.rvm/gems/ruby-3.0.0/gems/mbuild2-mlib-overlay-1.13.7/data/mlib/repo/java/jboss/java11.patch
+решается просто
+удаление github-jboss-modules-jboss-modules-1.8.10.Final.zip из /mbuild-cache/.mbuild2/dist и из /mbuild-cache/.mbuild2/tmp/build 
