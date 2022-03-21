@@ -392,3 +392,12 @@ ________________________________________________________________________________
 12:51:25.300   error: patch --binary -Np1 -i /home/vagrant/.rvm/gems/ruby-3.0.0/gems/mbuild2-mlib-overlay-1.13.7/data/mlib/repo/java/jboss/java11.patch
 решается просто
 удаление github-jboss-modules-jboss-modules-1.8.10.Final.zip из /mbuild-cache/.mbuild2/dist и из /mbuild-cache/.mbuild2/tmp/build 
+
+_____________________________________________________________________________________
+
+Указать новые даты через xpath
+Например для holidayBuilding transformationDate
+items_xpath_patch:
+"//holidayBuilding[@id='HOLIDAY_BUILDING_TEMP_07_REM_ECLIPSE']/transformationDate" : "2019-01-09T00:01:00"
+или для rule
+"//rule[@id="rule_per_26_temple_next_location"]/allMatcher/dateMatcher/@date" : "2019-01-09T00:01:00"
