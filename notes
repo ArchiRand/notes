@@ -406,3 +406,4 @@ ________________________________________________________________________________
 Если команда 
 git submodule update --init --recursive не помогает, то можно попробовать 
 git submodule update --init --force --remote
+git submodule update --init --force --remote mobile-framework
