@@ -407,3 +407,8 @@ ________________________________________________________________________________
 git submodule update --init --recursive не помогает, то можно попробовать 
 git submodule update --init --force --remote
 git submodule update --init --force --remote mobile-framework
+
+
+_____________________________________________________________________________________
+Выполнить bin/mbuild //:ide на винде надо так
+bundle exec mbuild //:ide
