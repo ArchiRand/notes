@@ -410,5 +410,14 @@ git submodule update --init --force --remote mobile-framework
 
 
 _____________________________________________________________________________________
+
 Выполнить bin/mbuild //:ide на винде надо так
 bundle exec mbuild //:ide
+
+_____________________________________________________________________________________
+
+Накатить схему cassandra заново:
+открываешь терминал и выполняешь cqlsh.
+выполняешь DROP KEYSPACE atlantis;
+в atlantis/atlantis-mobile-server/common/ находится db_schema.cql. 
+выполняешь команду SOURCE 'твой_путь_к_db_schema/db_schema.cql';
