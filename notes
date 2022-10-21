@@ -465,4 +465,4 @@ sudo dmesg
 _____________________________________________________________________________________
 
 
-/var/log/atlantisdebug $ xzgrep "Can not load items" 
+/var/log/atlantisdebug $ xzgrep "Can not load items" atlantisdebug.log.2022-10-21.xz
