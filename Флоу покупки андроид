@@ -1,0 +1,74 @@
+Флоу не отложенной покупки
+
+Покупка начинается с того, что клиент(андроид) присылает ивент о начале покупки:
+{
+  "type": "startedPayment",
+  "action": "addStartedPayment",
+  "amountUser": "394",
+  "currencyUser": "USD",
+  "id": "12",
+  "itemId": "vizor_atlantis_cash_tier4",
+  "productId": "vizor_atlantis_cash_tier4"
+}
+
+Он обрабытывается в StartedPaymentEventProcessor.
+StartedPaymentEventProcessor передаёт управление в UserStartedPaymentsManager.addStartedPayment который в свою очередь
+сохраняет в стейт инфу о покупаемом паке.
+В стейте это выглядит так:
+"featureObjects": {
+    "startedPayments": {
+      "type": "startedPayments",
+      "productItemMap": {},
+      "startedPayments": [
+        {
+          "product": "vizor_atlantis_cash_tier4",
+          "itemId": "vizor_atlantis_cash_tier4",
+          "amountUser": 3.99,
+          "currencyUser": "USD"
+        }
+      ]
+    }
+  }
+
+Если сохранение в стейт прошло успешно, то сервер отвечает ивентом вида:
+{
+  "type": "startedPayment",
+  "id": "4",
+  "action": "ok"
+}
+
+Когда игрок подтверждает покупку пака в игре, то клиент присылает ивент вида:
+{
+  "type": "androidMobilePayment",
+  "id": "15",
+  "inappDataSignature": "Us+UYTROqk4b7ZzDT6AUdHGAUIOfGYzgqpwBNHBRLzI7Q16DDhXP25zYCNpcn3+8OBhRPD/VPNngU64WC4lsuRv4Me6meAFXFmIqWBHx4sqgfhdIeFbHVo47p7vud/YzW22PktchU98cMHJM1bskEGwEEz37OgvXd71gfN43QwZWFc729csdAmbG5IU7/RrpQvfFHNQDlEisneLs5GVAb/MXtNN98cQt283DAyQfI9O1EnNyeXxYKnxh/U0TUCz/ssSNweJVLuAAw6uZWV2O3xmsOof+tah76sFT4P2DakgIdywSGgO4mx7JHDFuq+6NO0vSD9kCPZ5IUltultGAFQ==",
+  "payment": "{\"orderId\":\"GPA.3373-9453-3795-25008\",\"packageName\":\"com.vizorapps.atlantis\",\"productId\":\"vizor_atlantis_cash_tier4\",\"purchaseTime\":1666769065799,\"purchaseState\":0,\"purchaseToken\":\"lbdngeegeddhdljcfgfnlplp.AO-J1OxSO-YnDYV3FT7PAMvKosRvYeAtb9oHPnXxSmmE7WQXp4VO_u5jw-S9nIvL07Yq7xOfoYtmb8s1bQ58TAZTAnBbhMEU1reOxagM29QsGja9zxJMXpw\",\"quantity\":1,\"acknowledged\":false}"
+}
+
+который обрабытывается в GooglePaymentValidator.processPayment. 
+Здесь происходит валидация платежа. 
+Если всё хорошо, то вызывается метод GooglePaymentValidator.completePayment => SinglePaymentManager.completePayment => MobileGameSession.doPayment.
+В MobileGameSession.doPayment происходит формирование MobilePaymentPack и начисление покупки в стейт. После этого создаётся Payment, который в последствии сохраняется в стейте игрока:
+
+"payments": [
+	{
+		"uuid": "7d8bc8e0-54ff-11ed-b94d-372c61d00d40",
+		"id": "GPA.3373-9453-3795-25008",
+		"user": "1-CYR0",
+		"amount": 3.99,
+		"currency": "USD",
+		"product": "vizor_atlantis_cash_tier4",
+		"count": 100,
+		"extra": "regular",
+		"pack": "vizor_atlantis_cash_tier4",
+		"amountUser": 3.94,
+		"currencyUser": "USD",
+		"group": {
+		  "platform": "android",
+		  "version": "1.50",
+		  "markers": [
+		    "AB_MONEYBOX_CASH_VS_AB_MONEYBOX_CASH_FREE-ab_moneybox_cash_vs_free_test",
+		    "payer"
+		  ]
+	},
+]
