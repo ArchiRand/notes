@@ -479,5 +479,5 @@ ________________________________________________________________________________
 
 Установка кредов для nexus
 
-bundle config set --global nexus.vizor-games.com username:password
+bundle config set --global nexus.tools.vizor-games.com username:password
 
