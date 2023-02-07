@@ -501,3 +501,32 @@ ________________________________________________________________________________
 https://vizor-games.slack.com/archives/GQ8DYA0RG/p1673339589724699?thread_ts=1673337301.621949&cid=GQ8DYA0RG
 
 Поисследовал ошибку. Игроки были в суспенде, когда сервер перезагружался. Ключи для авторизации поменялись, а игрок пытается подключатся по старым. Но как понял у игрока никакой ошибки на UI нет, он просто перезагружается (нормальный флоу при продолжении игры)
+
+
+_____________________________________________________________________________________
+
+Пример слушания создания бинов в джусе
+
+public class SessionScopeBeanCreationListener implements TypeListener
+{
+    @Override
+    public <I> void hear(TypeLiteral<I> type, TypeEncounter<I> encounter)
+    {
+        if (type.getRawType().isAnnotationPresent(SessionScope.class))
+        {
+            AtomicReference<AtlantisSession> session = new AtomicReference<>();
+            Map<AtlantisSession, List<Object>> sessionBeans = new HashMap<>();
+            encounter.register((MembersInjector<I>) (instance) ->
+            {
+               if (type.getRawType().equals(AtlantisSession.class))
+               {
+                   session.set((AtlantisSession) instance);
+               }
+               else
+               {
+                   sessionBeans.computeIfAbsent(session.get(), k -> new ArrayList<>()).add(instance);
+               }
+            });
+        }
+    }
+}
