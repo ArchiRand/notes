@@ -552,3 +552,11 @@ sudo systemctl start lightdm
 
 Установить терминал
 sudo apt-get install gnome-terminal
+
+Ошибка
+can't read mbuild.default.yml: No such file or directory
+
+починили. шаги:
+создали C:/Users/user_name/.mbuild2/mbuild.default.yml
+прописали туда строчку mlib_cache_auth: ['my.login', 'PASSWORD']  (креды у каждого свои)
+задестроили и стартанули вагрант
