@@ -560,3 +560,18 @@ can't read mbuild.default.yml: No such file or directory
 создали C:/Users/user_name/.mbuild2/mbuild.default.yml
 прописали туда строчку mlib_cache_auth: ['my.login', 'PASSWORD']  (креды у каждого свои)
 задестроили и стартанули вагрант
+
+
+_____________________________________________________________________________________
+
+Найти и удалить определённые папки
+
+To remove directories that start with a specified name, you can use the find command with the -name option, 
+which allows you to search for files and directories by name. Here's an example command that will remove 
+all directories in the current directory that start with the name dir_prefix:
+
+bash
+find . -type d -name 'dir_prefix*' -exec rm -r {} \;
+This command uses the find command to locate all directories (-type d) in the current directory that start with the name dir_prefix (-name 'dir_prefix*'). 
+The -exec option then executes the rm command on each of the matching directories, with the -r option to remove them recursively (i.e., along with their contents). 
+The {} and \; are placeholders that tell find to substitute the directory name for {} and to end the command with \;.
