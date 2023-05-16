@@ -574,4 +574,21 @@ bash
 find . -type d -name 'dir_prefix*' -exec rm -r {} \;
 This command uses the find command to locate all directories (-type d) in the current directory that start with the name dir_prefix (-name 'dir_prefix*'). 
 The -exec option then executes the rm command on each of the matching directories, with the -r option to remove them recursively (i.e., along with their contents). 
-The {} and \; are placeholders that tell find to substitute the directory name for {} and to end the command with \;.
+The {} and \; are placeholders that tell find to substitute the directory name for {} and to end the command with \;.+
+
+_____________________________________________________________________________________
+
+Если при сборке десктопа такая ошибка
+D:\atlantis\atlantis\atlantis-desktop>cd ..
+
+D:\atlantis\atlantis>bundle install   && cmd /k bundle exec mbuild //atlantis-desktop:run
+Calling `DidYouMean::SPELL_CHECKERS.merge!(error_name => spell_checker)' has been deprecated. Please call `DidYouMean.correct_error(error_name, spell_checker)' instead.
+
+то нужно проверить версию руби. Должна быть актуальной на момент проверки
+Если с руби всё ок, то выполни в терминале:
+bundle update --bundler
+
+Если после этого будет такое:
+Please supply credentials for this source. You can do it by running
+bundle config set --global...
+то надо выполнить эту команду только без ковычек и в конце укажи свой логин и пароль от корпоративного аккаунта и потом пересобирай
