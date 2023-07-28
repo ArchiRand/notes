@@ -592,3 +592,9 @@ bundle update --bundler
 Please supply credentials for this source. You can do it by running
 bundle config set --global...
 то надо выполнить эту команду только без ковычек и в конце укажи свой логин и пароль от корпоративного аккаунта и потом пересобирай
+
+_____________________________________________________________________________________
+
+Другой логин от админ методов для серверов
+Server
+BnFl0vr3XYoRxwttrxyVpNDtA46UeYmNVtCQ6QDkBb2DT3sx
