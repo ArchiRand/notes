@@ -4,7 +4,7 @@ $ sudo su atlantis
 - настройка JFT
 $ jcmd 16039 JFR.configure repositorypath=/home/artyom.lisaev/diagnostics/atlantis maxchunksize=100m stackdepth=1024
 - запуск JFR
-$ jcmd 16039 JFR.start filename=/home/artyom.lisaev/diagnostics/atlantis maxsize=5G duration=1h disk=true dumponexit=true
+$ jcmd 16039 JFR.start filename=/home/artyom.lisaev/diagnostics/atlantis maxsize=5G duration=1h disk=true dumponexit=true settings=/home/artyom.lisaev/custom.jfc
 
 - если нужно скопировать настройки для профилирования
 $ scp /home/artyom-lisaev/Desktop/custom.jfc artyom.lisaev@66.242.15.74:/home/artyom.lisaev/
