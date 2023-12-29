@@ -1,3 +1,19 @@
+Запуск JFR на релизном сервере:
+- запуск и конфигурирование JFR должно происходить от пользователя atlantis
+$ sudo su atlantis
+- настройка JFT
+$ jcmd 16039 JFR.configure repositorypath=/home/artyom.lisaev/diagnostics/atlantis maxchunksize=100m stackdepth=1024
+- запуск JFR
+$ jcmd 16039 JFR.start filename=/home/artyom.lisaev/diagnostics/atlantis maxsize=5G duration=1h disk=true dumponexit=true
+
+- если нужно скопировать настройки для профилирования
+$ scp /home/artyom-lisaev/Desktop/custom.jfc artyom.lisaev@66.242.15.74:/home/artyom.lisaev/
+
+- скопировать результат профилирования
+$ scp artyom.lisaev@209.192.191.164:/home/artyom.lisaev/diagnostics/atlantis/2023_12_27_23_34_02_7955/2023_12_28_00_24_31.jfr /home/artyom-lisaev/release/atlantis-4/28.12.2023/
+
+
+
 Задача для серверного:
 Необходимо сделать новый тип здания - "Бар".
 Перед тем как игрок начнёт им пользоваться его необходимо построить. Должно быть 2 стадии постройки и возможность указывать какой материал и в каких количествах необходимо потратить на строительство каждой стадии. Для строительсва любой из стадий может быть указано любое количество материалов для списания. После завершения строительства каждой стадии необходимо отправить в вайзорлитику ивент "Bar build stage updated" с параметрами:
