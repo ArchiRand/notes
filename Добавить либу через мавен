@@ -1,0 +1,12 @@
+
+task :deps do |t|
+  t.mlib!(DEPS)
+  t.maven_deps! do
+    lib 'org.apache.poi:poi:3.13'
+    lib 'org.apache.poi:poi-ooxml:3.13'
+    lib 'org.apache.poi:ooxml-schemas:1.4'
+  end
+end
+
+еще в idea_deps
+и res_ide
